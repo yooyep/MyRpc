@@ -1,4 +1,5 @@
 import cjc.api.HelloService;
+import registry.DefaultServiceRegistry;
 import server.RpcServer;
 
 /**
@@ -8,7 +9,10 @@ import server.RpcServer;
 public class TestServer {
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl();
-        RpcServer rpcServer = new RpcServer();
-        rpcServer.register(helloService, 9000);
+        DefaultServiceRegistry defaultServiceRegistry = new DefaultServiceRegistry();
+        defaultServiceRegistry.register(helloService); //向注册中心 注册服务
+
+        RpcServer rpcServer = new RpcServer(defaultServiceRegistry);
+        rpcServer.start(9000);
     }
 }
