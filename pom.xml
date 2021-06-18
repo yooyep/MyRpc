@@ -4,7 +4,6 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>server</module>
         <module>common</module>
         <module>core</module>
         <module>test-server</module>
@@ -16,7 +15,6 @@
         <version>2.5.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
 
     <groupId>cjc</groupId>
     <artifactId>rpc</artifactId>
@@ -43,6 +41,13 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>4.1.50.Final</version>
+        </dependency>
+
     </dependencies>
 
     <build>

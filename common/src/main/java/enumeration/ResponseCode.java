@@ -9,7 +9,7 @@ import lombok.Getter;
  */
 @AllArgsConstructor
 @Getter
-public enum  ResponseCode {
+public enum ResponseCode {
 
     SUCCESS(200,"调用方法成功"),
     FAIL(500,"调用方法失败"),

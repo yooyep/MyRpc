@@ -30,7 +30,6 @@ public class RequestHandler {
         try {
             result = invokeTargetMethod(rpcRequest,service);
             logger.info("服务:{} 成功调用方法:{}", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());
-
         } catch (InvocationTargetException | IllegalAccessException e) {
             logger.error("调用或发送时有错误发生：", e);
         }

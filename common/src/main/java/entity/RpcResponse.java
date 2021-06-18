@@ -2,6 +2,7 @@ package entity;
 
 import enumeration.ResponseCode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 
 import java.io.Serializable;
@@ -11,6 +12,7 @@ import java.io.Serializable;
  * @create 2021-06-07 21:44
  */
 @Data
+@NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
     // 响应状态码
     private Integer statusCode;
