@@ -1,7 +1,6 @@
-package client;
+package common;
 
 import entity.RpcRequest;
-import entity.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

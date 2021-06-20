@@ -1,8 +1,10 @@
-package server;
+package socket.server;
 
+import common.RequestHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import registry.ServiceRegistry;
+import common.RpcServer;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -13,7 +15,7 @@ import java.util.concurrent.*;
  * @author yooyep
  * @create 2021-06-14 11:29
  */
-public class SocketServer implements RpcServer{
+public class SocketServer implements RpcServer {
     private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
     private static final int CORE_POOL_SIZE = 5;

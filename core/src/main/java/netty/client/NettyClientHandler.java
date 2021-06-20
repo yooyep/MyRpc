@@ -1,4 +1,4 @@
-package client;
+package netty.client;
 
 import entity.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
@@ -7,7 +7,6 @@ import io.netty.util.AttributeKey;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter;
 
 /**
  * 客户端处理器

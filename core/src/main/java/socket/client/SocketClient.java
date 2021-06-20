@@ -1,5 +1,6 @@
-package client;
+package socket.client;
 
+import common.RpcClient;
 import entity.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +15,7 @@ import java.net.Socket;
  * @author yooyep
  * @create 2021-06-14 11:07
  */
-public class SocketClient implements RpcClient{
+public class SocketClient implements RpcClient {
     private static final Logger logger = LoggerFactory.getLogger(SocketClient.class);
 
     private final String host;

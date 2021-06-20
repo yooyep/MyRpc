@@ -1,4 +1,4 @@
-package client;
+package common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.RpcRequest;

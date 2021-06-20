@@ -1,28 +1,28 @@
-package client;
+package netty.client;
+
 
 import codec.CommonDecoder;
 import codec.CommonEncoder;
-import com.sun.source.tree.TryTree;
+import common.RpcClient;
 import entity.RpcRequest;
 import entity.RpcResponse;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
-import io.netty.channel.nio.NioEventLoop;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
-import org.apache.juli.logging.LogFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import serializer.JsonSerializer;
+import serializer.KryoSerializer;
 
 /**
  * NIO范式 构建客户端
  * @author yooyep
  * @create 2021-06-18 14:14
  */
-public class NettyClient implements RpcClient{
+public class NettyClient implements RpcClient {
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
     private String host;
     private int port;
@@ -44,9 +44,10 @@ public class NettyClient implements RpcClient{
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast(new CommonDecoder())
-                                .addLast(new CommonEncoder(new JsonSerializer()))
-                                .addLast(new NettyClientHandler());
+                        pipeline.addLast(new CommonDecoder());
+//                        pipeline.addLast(new CommonEncoder(new JsonSerializer()));
+                        pipeline.addLast(new CommonEncoder(new KryoSerializer()));
+                        pipeline.addLast(new NettyClientHandler());
                     }
                 });
     }

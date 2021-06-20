@@ -1,7 +1,7 @@
 import cjc.api.HelloObject;
 import cjc.api.HelloService;
-import client.NettyClient;
-import client.RpcClientProxy;
+import common.RpcClientProxy;
+import netty.client.NettyClient;
 
 /**
  * @author yooyep

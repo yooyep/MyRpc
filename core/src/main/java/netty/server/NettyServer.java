@@ -1,6 +1,6 @@
-package server;
+package netty.server;
 
-import client.NettyClient;
+import netty.client.NettyClient;
 import codec.CommonDecoder;
 import codec.CommonEncoder;
 import io.netty.bootstrap.ServerBootstrap;
@@ -8,12 +8,13 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import serializer.JsonSerializer;
+import common.RpcServer;
+import serializer.KryoSerializer;
 
 /**
  * @author yooyep
@@ -38,7 +39,8 @@ public class NettyServer implements RpcServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new CommonEncoder(new JsonSerializer()));
+//                            pipeline.addLast(new CommonEncoder(new JsonSerializer()));
+                            pipeline.addLast(new CommonEncoder(new KryoSerializer()));
                             pipeline.addLast(new CommonDecoder());
                             pipeline.addLast(new NettyServerHandler());
                         }

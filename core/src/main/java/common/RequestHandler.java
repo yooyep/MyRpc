@@ -1,10 +1,8 @@
-package server;
+package common;
 
 import entity.RpcRequest;
 import entity.RpcResponse;
 import enumeration.ResponseCode;
-import enumeration.RpcError;
-import exception.RpcException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

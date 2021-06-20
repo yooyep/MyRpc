@@ -1,7 +1,6 @@
 import cjc.api.HelloService;
 import registry.DefaultServiceRegistry;
-import server.NettyServer;
-import server.SocketServer;
+import socket.server.SocketServer;
 
 /**
  * @author yooyep

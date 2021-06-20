@@ -1,5 +1,6 @@
-package server;
+package socket.server;
 
+import common.RequestHandler;
 import entity.RpcRequest;
 import entity.RpcResponse;
 import org.slf4j.Logger;
