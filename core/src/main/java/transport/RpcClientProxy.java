@@ -1,4 +1,4 @@
-package common;
+package transport;
 
 import entity.RpcRequest;
 import org.slf4j.Logger;
@@ -30,7 +30,7 @@ public class RpcClientProxy implements InvocationHandler {
     // 代理对象的方法 被调用的过程（发送RpcRequest给服务端，从服务端接收被调用的结果）；
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        logger.info("调用方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
+        logger.info("调用方法: {} - {}", method.getDeclaringClass().getName(), method.getName());
 
         RpcRequest rpcRequest = new RpcRequest(method.getDeclaringClass().getName(),
                 method.getName(), args, method.getParameterTypes());

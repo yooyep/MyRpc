@@ -1,4 +1,4 @@
-package netty.client;
+package transport.netty.client;
 
 import entity.RpcResponse;
 import io.netty.channel.ChannelHandlerContext;
@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * 客户端处理器
+ * 处理服务端传过来的RpcResponse
  * @author yooyep
  * @create 2021-06-18 16:44
  */

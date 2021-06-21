@@ -1,4 +1,4 @@
-package netty.server;
+package transport.netty.server;
 
 import entity.RpcRequest;
 import entity.RpcResponse;
@@ -9,23 +9,24 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import registry.DefaultServiceRegistry;
-import registry.ServiceRegistry;
-import common.RequestHandler;
+import transport.RequestHandler;
+import provider.ServiceProvider;
+import provider.ServiceProviderImpl;
+
 
 /**
- * 处理RpcRequest的Handler
+ * 处理传输过来的RpcRequest 的Handler
  * @author yooyep
  * @create 2021-06-18 17:30
  */
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
     private static final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);
     private static RequestHandler requestHandler;
-    private static ServiceRegistry serviceRegistry;
+    private static ServiceProvider serviceRegistry;
 
     static {
         requestHandler = new RequestHandler();
-        serviceRegistry = new DefaultServiceRegistry();
+        serviceRegistry = new ServiceProviderImpl();
     }
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) throws Exception {

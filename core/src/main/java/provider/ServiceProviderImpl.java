@@ -1,4 +1,4 @@
-package registry;
+package provider;
 
 import enumeration.RpcError;
 import exception.RpcException;
@@ -11,17 +11,18 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * 默认的服务注册表，保存本地服务
  * @author yooyep
  * @create 2021-06-15 20:23
  */
-public class DefaultServiceRegistry implements ServiceRegistry {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultServiceRegistry.class);
+public class ServiceProviderImpl implements ServiceProvider {
+    private static final Logger logger = LoggerFactory.getLogger(ServiceProviderImpl.class);
 
     private static final Map<String,Object> serviceMap = new ConcurrentHashMap<>();
     private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
 
     @Override
-    public <T> void register(T service) {
+    public <T> void addServiceProvider(T service) {
         String serviceName = service.getClass().getCanonicalName();
         if(registeredService.contains(serviceName))
             return;
@@ -34,6 +35,7 @@ public class DefaultServiceRegistry implements ServiceRegistry {
             serviceMap.put(i.getCanonicalName(), service);
         }
         logger.info("向接口: {} 注册服务: {}", interfaces, serviceName);
+        //向接口: [interface cjc.api.HelloService] 注册服务: HelloServiceImpl
     }
 
     @Override

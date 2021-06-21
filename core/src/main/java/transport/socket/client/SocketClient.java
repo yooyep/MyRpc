@@ -1,7 +1,9 @@
-package socket.client;
+package transport.socket.client;
 
-import common.RpcClient;
+import serializer.CommonSerializer;
+import transport.RpcClient;
 import entity.RpcRequest;
+import entity.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,10 +42,16 @@ public class SocketClient implements RpcClient {
             objectOutputStream.writeObject(rpcRequest);
             objectOutputStream.flush();
             // 直接返回object对象
-            return objectInputStream.readObject();
+            RpcResponse rpcResponse = (RpcResponse) objectInputStream.readObject();
+            return rpcResponse.getData();
         } catch (IOException | ClassNotFoundException e) {
             logger.error("调用时发生错误：",e);
             return null;
         }
+    }
+
+    @Override
+    public void setSerializer(CommonSerializer serializer) {
+
     }
 }

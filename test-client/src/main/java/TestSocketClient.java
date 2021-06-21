@@ -1,7 +1,7 @@
 import cjc.api.HelloObject;
 import cjc.api.HelloService;
-import common.RpcClientProxy;
-import socket.client.SocketClient;
+import transport.RpcClientProxy;
+import transport.socket.client.SocketClient;
 
 /**
  * @author yooyep

@@ -24,6 +24,7 @@ public class RpcResponse<T> implements Serializable {
     public static <T> RpcResponse<T> success(T data) {
         RpcResponse<T> response = new RpcResponse<>();
         response.setStatusCode(ResponseCode.SUCCESS.getCode());
+
         response.setData(data);
         return response;
     }

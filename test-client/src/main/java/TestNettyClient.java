@@ -1,7 +1,8 @@
 import cjc.api.HelloObject;
 import cjc.api.HelloService;
-import common.RpcClientProxy;
-import netty.client.NettyClient;
+import serializer.KryoSerializer;
+import transport.RpcClientProxy;
+import transport.netty.client.NettyClient;
 
 /**
  * @author yooyep
@@ -9,8 +10,10 @@ import netty.client.NettyClient;
  */
 public class TestNettyClient {
     public static void main(String[] args) {
-        NettyClient nettyClient = new NettyClient("127.0.0.1", 9000);
+        NettyClient nettyClient = new NettyClient();
+        nettyClient.setSerializer(new KryoSerializer()); //设置 序列化
         RpcClientProxy proxy = new RpcClientProxy(nettyClient);
+
         HelloService helloService = proxy.getProxy(HelloService.class);
         HelloObject object = new HelloObject(888, "this is a message");
         // rpc远程调用

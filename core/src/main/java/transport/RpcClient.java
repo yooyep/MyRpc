@@ -1,7 +1,8 @@
-package common;
+package transport;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.RpcRequest;
+import serializer.CommonSerializer;
 
 /**
  * @author yooyep
@@ -9,4 +10,5 @@ import entity.RpcRequest;
  */
 public interface RpcClient {
     Object sendRequest(RpcRequest rpcRequest);
+    void setSerializer(CommonSerializer serializer);
 }

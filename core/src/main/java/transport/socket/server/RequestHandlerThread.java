@@ -1,11 +1,11 @@
-package socket.server;
+package transport.socket.server;
 
-import common.RequestHandler;
+import transport.RequestHandler;
 import entity.RpcRequest;
 import entity.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import registry.ServiceRegistry;
+import provider.ServiceProvider;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -22,9 +22,9 @@ public class RequestHandlerThread implements Runnable{
 
     private Socket socket;
     private RequestHandler requestHandler;
-    private ServiceRegistry serviceRegistry;
+    private ServiceProvider serviceRegistry;
 
-    public RequestHandlerThread(Socket socket, RequestHandler requestHandler, ServiceRegistry serviceRegistry) {
+    public RequestHandlerThread(Socket socket, RequestHandler requestHandler, ServiceProvider serviceRegistry) {
         this.socket = socket;
         this.requestHandler = requestHandler;
         this.serviceRegistry = serviceRegistry;
