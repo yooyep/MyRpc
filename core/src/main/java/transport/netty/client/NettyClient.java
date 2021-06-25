@@ -5,7 +5,10 @@ import codec.CommonDecoder;
 import codec.CommonEncoder;
 import enumeration.RpcError;
 import exception.RpcException;
+import loadbalance.LoadBalance;
+import registry.NacosServiceDiscovery;
 import registry.NacosServiceRegistry;
+import registry.ServiceDiscovery;
 import registry.ServicesRegitry;
 import serializer.CommonSerializer;
 import transport.RpcClient;
@@ -32,8 +35,15 @@ public class NettyClient implements RpcClient {
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
 
     private static final Bootstrap bootstrap;
-    private static final ServicesRegitry servicesRegitry = new NacosServiceRegistry();
     private static CommonSerializer serializer;
+    private ServiceDiscovery serviceDiscovery = new NacosServiceDiscovery();
+
+    public NettyClient() {
+    }
+
+    public NettyClient(LoadBalance loadBalance) {
+        this.serviceDiscovery = new NacosServiceDiscovery(loadBalance);
+    }
 
     static {
         NioEventLoopGroup group = new NioEventLoopGroup();
@@ -67,7 +77,7 @@ public class NettyClient implements RpcClient {
         }
 
         try {
-            InetSocketAddress inetSocketAddress = servicesRegitry.lookupService(rpcRequest.getInterfaceName());
+            InetSocketAddress inetSocketAddress = serviceDiscovery.lookupService(rpcRequest.getInterfaceName());
             ChannelFuture future = bootstrap.connect(inetSocketAddress.getHostName(), inetSocketAddress.getPort()).sync();
 //            ChannelFuture future = bootstrap.connect(host, port).sync();
             logger.info("客户端连接到服务器（注册版） {}:{}", inetSocketAddress.getHostName(), inetSocketAddress.getPort());
@@ -76,11 +86,12 @@ public class NettyClient implements RpcClient {
                 // 客户端 发送消息
                 channel.writeAndFlush(rpcRequest).addListener(future1 -> {
                     if(future1.isSuccess()) {
-                        logger.info(String.format("netty客户端发送消息: %s", rpcRequest.toString()));
+                        logger.info("客户端向服务端{} 发送消息: {}", inetSocketAddress.getPort(), rpcRequest.toString());
                     } else {
                         logger.error("发送消息时有错误发生: ", future1.cause());
                     }
                 });
+                // 阻塞等待channel关闭，--接收到response
                 channel.closeFuture().sync();
 
                 AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");

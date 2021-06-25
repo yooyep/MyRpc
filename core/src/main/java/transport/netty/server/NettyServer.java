@@ -2,6 +2,7 @@ package transport.netty.server;
 
 import enumeration.RpcError;
 import exception.RpcException;
+import hook.ShutdownHook;
 import provider.ServiceProvider;
 import provider.ServiceProviderImpl;
 import registry.NacosServiceRegistry;
@@ -58,6 +59,9 @@ public class NettyServer implements RpcServer {
 
     @Override
     public void start(){
+        // 添加自动注销服务的任务
+        ShutdownHook.getShutdownHook().addShutdownHook();
+
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {

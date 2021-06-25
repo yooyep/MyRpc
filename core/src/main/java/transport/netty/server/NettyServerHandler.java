@@ -31,7 +31,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) throws Exception {
         try {
-            logger.info(String.format("服务器接收到请求: {}", msg.toString()));
+            logger.info("服务器接收到请求: {}", msg.toString());
             // 根据接口名 获取 已注册的服务
             String interfaceName = msg.getInterfaceName();
             Object service = serviceRegistry.getService(interfaceName);

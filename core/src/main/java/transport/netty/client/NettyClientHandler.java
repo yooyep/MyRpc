@@ -23,6 +23,7 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
             logger.info(String.format("客户端接收到消息: %s", msg));
             AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
             ctx.channel().attr(key).set(msg);
+            // 通知channel关闭，服务端链路关闭；
             ctx.channel().close();
         } finally {
             ReferenceCountUtil.release(msg);
