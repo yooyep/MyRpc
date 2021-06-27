@@ -77,6 +77,7 @@ public class NettyClient implements RpcClient {
         }
 
         try {
+            // 1.去注册中心找能提供服务的 服务器地址
             InetSocketAddress inetSocketAddress = serviceDiscovery.lookupService(rpcRequest.getInterfaceName());
             ChannelFuture future = bootstrap.connect(inetSocketAddress.getHostName(), inetSocketAddress.getPort()).sync();
 //            ChannelFuture future = bootstrap.connect(host, port).sync();

@@ -8,6 +8,7 @@ import provider.ServiceProviderImpl;
 import registry.NacosServiceRegistry;
 import registry.ServicesRegitry;
 import serializer.CommonSerializer;
+import transport.AbstractRpcServer;
 import transport.netty.client.NettyClient;
 import codec.CommonDecoder;
 import codec.CommonEncoder;
@@ -29,7 +30,7 @@ import java.net.InetSocketAddress;
  * @author yooyep
  * @create 2021-06-18 17:26
  */
-public class NettyServer implements RpcServer {
+public class NettyServer extends AbstractRpcServer {
     private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
 
     private final String host;
@@ -43,6 +44,9 @@ public class NettyServer implements RpcServer {
         this.port = port;
         serviceRegistry = new NacosServiceRegistry();
         serviceProvider = new ServiceProviderImpl();
+        serializer = new KryoSerializer();
+        // 扫描@Service，自动注册服务
+        scanServices();
     }
 
     @Override
@@ -96,6 +100,5 @@ public class NettyServer implements RpcServer {
     public void setSerializer(CommonSerializer serializer) {
         this.serializer = serializer;
     }
-
 
 }

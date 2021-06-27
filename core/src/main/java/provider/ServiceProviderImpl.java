@@ -21,6 +21,11 @@ public class ServiceProviderImpl implements ServiceProvider {
     private static final Map<String,Object> serviceMap = new ConcurrentHashMap<>();
     private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
 
+    /**
+     * 
+     * @param service 待注册的服务实体类
+     * @param <T>
+     */
     @Override
     public <T> void addServiceProvider(T service) {
         String serviceName = service.getClass().getCanonicalName();

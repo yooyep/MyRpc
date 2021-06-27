@@ -1,3 +1,4 @@
+import cjc.api.HelloName;
 import cjc.api.HelloObject;
 import cjc.api.HelloService;
 import serializer.KryoSerializer;
@@ -22,6 +23,9 @@ public class TestNettyClient {
             System.out.println(result);
             Thread.sleep(500);
         }
+
+        HelloName helloName = proxy.getProxy(HelloName.class);
+        System.out.println(helloName.hello("cjc"));
 
     }
 }

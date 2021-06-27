@@ -12,8 +12,8 @@ public interface RpcServer {
     void setSerializer(CommonSerializer serializer);
     /**
      * 注册 发布服务
-     * @param service
-     * @param serviceClass
+     * @param service 服务实例
+     * @param serviceClass 服务类
      * @param <T>
      */
     <T> void publishService(Object service, Class<T> serviceClass);

@@ -1,3 +1,5 @@
+package test;
+
 import cjc.api.HelloService;
 import provider.ServiceProviderImpl;
 import transport.socket.server.SocketServer;
